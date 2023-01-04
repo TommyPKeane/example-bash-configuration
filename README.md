@@ -63,12 +63,14 @@ New Contents for `/etc/shells` that has now added `/opt/homebrew/bin/bash` to th
 
 Commands to overwrite the contents of the file with the new above contents, as long as you've pressed no other keys except to copy the above text from this file:
 
-1. `ESC`
+1. `ESC` (Make sure you're in Command Mode)
 1. `g` then `g` (Move to Start of File)
 1. `d` (Begin Delete)
 1. `SHIFT` + `g` (End Delete at End of File)
 1. `SHIFT` + `a` (Enter into Append Mode)
 1. `CMD` + `v` (Paste new Contents)
+1. `ESC` (Go back to Command Mode)
+1. `:` then `w` then `q` then `ENTER` (or `RETURN`) (Write new File changes and Quit `vim`)
 
 ### Install macOS Commandline Utilities
 
