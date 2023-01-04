@@ -114,7 +114,39 @@ Once that installs, you can now start installing tools from `brew`, and here is 
 
 ### `bash` Configuration Files
 
+The `.bashrc.d` directory provides a bunch of `.bash` files, which are just shell scripts using `bash` syntax, and have been configured this way to just show them as being different from "normal" shell scripts.
+
+The idea here, which I found from a blog which I'll add here as a reference, is that we can iterate through this directory based-on the custom `.bash` file-extension, and simply parse these files in the order we discover them by calling the `source` command. By doing that, we can `source` all the files into the `bash` configuration, without having to put everything into one giant long file.
+
+This should make it easier to see what configuration is setup for each utility, as needed, and allow us to add more as we go, or remove any that we don't want or need anymore.
+
+You can see that from this snippet that you'll find in the `.bashrc` file:
+
+```bash
+# Source the ~/.bashrc.d directory
+for custom_config_file in ~/.bashrc.d/*.bash; do
+    source ${custom_config_file}
+done
+unset -v custom_config_file
+```
+
+Note that "work" being done here is the `source` command. Some of the text here can be put into variables to make this snippet more configurable, but I find this to be straight-forward enough, as it currently is.
+
+The `unset` call is basically a "clean-up" command to make sure that this iteration variable from the `for` loop does not stay in scope in your environment, since this is written into the `bash` configuration file, and due to the `chsh` command that we ran to set `bash` as the login shell, this will be run at the start of every terminal's shell environment.
+
+Note that you'll see some other stuff in the `.bashrc` file, because this method isn't foolproof.
+
+One major caveat is that we're going to be alphabetically iterating through the `.bash` files based-on the current system LOCALE configuration's alphanumerical (symbolic) ordering. This means that if there's any of these configurations that need to happen before or after other configurations, you can't control that with this approach, except by enforcing some specific naming conventions in the filenames.
+
 ### `bash` Profile and `.bashrc` File
+
+In macOS, the login shell as configured by `chsh` being `bash` will actually `source` the `~/.bash_profile` file for the current User, whose `$HOME` directory is equivalent to the `~/` shorthand.
+
+But in Linux variants, like Ubuntu (Debian), you'd find that the `~/.bashrc` file is actually the configuration file that gets sourced.
+
+So, you'll see that we keep the `.bash_profile` file and simply configure it to `source` the `.bashrc` file.
+
+This is, arguably, just a convenience that allows us to have a common `.bashrc` file across macOS and Linux environments.
 
 ## Linux (Desktop, VM, or Docker)
 
