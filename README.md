@@ -4,16 +4,19 @@ https://www.gnu.org/software/bash/
 
 <!-- MarkdownTOC -->
 
-- macOS \(Apple\)
-    - Reset macOS to use `bash` instead of `zsh`
-    - Install macOS Commandline Utilities
-    - Install `brew` and Other Tools
-    - `bash` Configuration Files
-    - `bash` Profile and `.bashrc` File
-- Linux \(Desktop, VM, or Docker\)
+- [macOS \(Apple\)](#macos-apple)
+    - [Reset macOS to use `bash` instead of `zsh`](#reset-macos-to-use-bash-instead-of-zsh)
+    - [Install macOS Commandline Utilities](#install-macos-commandline-utilities)
+    - [Install `brew` and Other Tools](#install-brew-and-other-tools)
+    - [`bash` Configuration Files](#bash-configuration-files)
+    - [`bash` Profile and `.bashrc` File](#bash-profile-and-bashrc-file)
+- [Linux \(Desktop, VM, or Docker\)](#linux-desktop-vm-or-docker)
+- [`_other-configs/` Directory](#_other-configs-directory)
+- [References](#references)
 
 <!-- /MarkdownTOC -->
 
+<a id="macos-apple"></a>
 ## macOS (Apple)
 
 In macOS, they've switched away from `bash` to `zsh`, but I ain't dealin' with all that, so I prefer to switch it back, and to use the latest version of `bash` from `brew` ([Homebrew](https://brew.sh)) for best compatibility with Linux systems (which is very relevant to contemporary Cloud-based development and deployments).
@@ -22,6 +25,7 @@ So, first, you'd have to follow these steps on how to switch back to `bash`, and
 
 Note that for all of this, I also strongly prefer to use [iTerm2](https://iterm2.com/) as a Terminal Emulator (instead of the built-in `terminal` App).
 
+<a id="reset-macos-to-use-bash-instead-of-zsh"></a>
 ### Reset macOS to use `bash` instead of `zsh`
 
 You can change the shell for yourself by running this command in the terminal, and this will set a permanent change:
@@ -72,6 +76,7 @@ Commands to overwrite the contents of the file with the new above contents, as l
 1. `ESC` (Go back to Command Mode)
 1. `:` then `w` then `q` then `ENTER` (or `RETURN`) (Write new File changes and Quit `vim`)
 
+<a id="install-macos-commandline-utilities"></a>
 ### Install macOS Commandline Utilities
 
 There's kind of a Catch-22 with macOS, that in order to install `brew`, you're going to also need to install the macOS Commandline Utilities so that you can get `git` and `curl` to be available, along with `gcc` (GNU Compiler Collection) for building and linking any relevant binaries during the `brew` setup and install.
@@ -82,6 +87,7 @@ To install these tools, you may get a prompt when you go to install `brew`, but 
 xcode-select --install
 ```
 
+<a id="install-brew-and-other-tools"></a>
 ### Install `brew` and Other Tools
 
 To install `brew`, you can refer the to [Homebrew Website](https://brew.sh/) to make sure this is the latest command, or copy and run this command, here:
@@ -114,6 +120,7 @@ Once that installs, you can now start installing tools from `brew`, and here is 
 - `brew install gcc` -- GNU Compiler Collection (C, C++, Fortran, etc. Compilers and Debuggers)
 - `brew install glib` -- `glibc` for macOS
 
+<a id="bash-configuration-files"></a>
 ### `bash` Configuration Files
 
 The `.bashrc.d` directory provides a bunch of `.bash` files, which are just shell scripts using `bash` syntax, and have been configured this way to just show them as being different from "normal" shell scripts.
@@ -140,6 +147,7 @@ Note that you'll see some other stuff in the `.bashrc` file, because this method
 
 One major caveat is that we're going to be alphabetically iterating through the `.bash` files based-on the current system LOCALE configuration's alphanumerical (symbolic) ordering. This means that if there's any of these configurations that need to happen before or after other configurations, you can't control that with this approach, except by enforcing some specific naming conventions in the filenames.
 
+<a id="bash-profile-and-bashrc-file"></a>
 ### `bash` Profile and `.bashrc` File
 
 In macOS, the login shell as configured by `chsh` being `bash` will actually `source` the `~/.bash_profile` file for the current User, whose `$HOME` directory is equivalent to the `~/` shorthand.
@@ -150,6 +158,15 @@ So, you'll see that we keep the `.bash_profile` file and simply configure it to 
 
 This is, arguably, just a convenience that allows us to have a common `.bashrc` file across macOS and Linux environments.
 
+<a id="linux-desktop-vm-or-docker"></a>
 ## Linux (Desktop, VM, or Docker)
 
 You can use most of these configuration files with Linux, as well, and similar tools exist, but you won't have access to `brew`, and you may need to install some of the tools directly.
+
+<a id="_other-configs-directory"></a>
+## `_other-configs/` Directory
+
+See the [`_other-configs/README.md`](./_other-configs/README.md) for details; but, this folder is meant for non-`bash` configurations that don't necessarily go here in the `$HOME` directory and are more just `bash`-adjacent, so I've collected them here for convenience (and so that I don't make _yet another_ new GitHub repo 👻).
+
+<a id="references"></a>
+## References
