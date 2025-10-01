@@ -4,7 +4,8 @@ https://www.gnu.org/software/bash/
 
 <!-- MarkdownTOC -->
 
-- [macOS \(Apple\)](#macos-apple)
+- [TLDR - Quick Install Scripts](#tldr---quick-install-scripts)
+- [macOS \(Apple\) Details](#macos-apple-details)
     - [Reset macOS to use `bash` instead of `zsh`](#reset-macos-to-use-bash-instead-of-zsh)
     - [Install macOS Commandline Utilities](#install-macos-commandline-utilities)
     - [Install `brew` and Other Tools](#install-brew-and-other-tools)
@@ -16,8 +17,31 @@ https://www.gnu.org/software/bash/
 
 <!-- /MarkdownTOC -->
 
-<a id="macos-apple"></a>
-## macOS (Apple)
+<a id="tldr---quick-install-scripts"></a>
+## TLDR - Quick Install Scripts
+
+This repo is now updated with some quick-install scripts that install everything for you.
+
+⚠️ I've tested these on macOS for myself, so you should make sure you check the scripts and what you already have, before you just blindly run these. Always feel free to clone or fork this repo and make changes as needed.
+
+🤓 Note that on macOS they now default to `zsh` instead of `bash`, so you'll unfortunately need to go through the [Reset macOS to use `bash` instead of `zsh`](#reset-macos-to-use-bash-instead-of-zsh) section first, and then you can run these scripts.
+
+> If you're doing that, you'll want to install Xcode Utilities and `brew` first, with:
+>   - `xcode-select --install`
+>   - `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+>
+> _(`bash` is already on your macOS system, it's just not the default anymore and it's outdated. When you do all this and run the scripts in the steps below, you'll get the latest version of GNU `bash` via `brew` to get all the contemporary advantages of the latest version of `bash`.)_
+
+To auto-install and setup your `bash` environment, you can do the following:
+
+1. Open your terminal and `cd` into this directory
+1. `./install_everything.sh`
+1. `./overwrite_bash_configs.sh`
+
+🤷‍♀️ If you prefer to use `zsh`, you can ignore all of the [Reset macOS to use `bash` instead of `zsh`](#reset-macos-to-use-bash-instead-of-zsh) section, and you'll have to modify the `.bashrc.d/` directory and all the `bash` scripts/files here to customize them to your environment. The `install_everything.sh` script should still work, though, so you can probably still use that.
+
+<a id="macos-apple-details"></a>
+## macOS (Apple) Details
 
 In macOS, they've switched away from `bash` to `zsh`, but I ain't dealin' with all that, so I prefer to switch it back, and to use the latest version of `bash` from `brew` ([Homebrew](https://brew.sh)) for best compatibility with Linux systems (which is very relevant to contemporary Cloud-based development and deployments).
 
