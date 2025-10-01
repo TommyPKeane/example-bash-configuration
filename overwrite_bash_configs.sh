@@ -25,5 +25,9 @@ cp -v ./.bashrc ~/
 cp -v ./.bash_profile ~/
 
 
+# Scroll Ahead
+clear
+
+
 # Update current Shell without needing to close Terminal
 source ~/.bashrc

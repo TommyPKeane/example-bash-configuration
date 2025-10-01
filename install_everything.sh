@@ -6,6 +6,7 @@
 #   - https://stackoverflow.com/questions/394230/how-to-detect-the-os-from-a-bash-script
 #   - https://stackoverflow.com/questions/23424783/ostype-not-available-in-shell-script
 #   - https://www.redhat.com/en/blog/exit-codes-demystified
+#   - https://stackoverflow.com/questions/2421586/what-is-the-bash-equivalent-of-pythons-pass-statement
 
 set -eu
 
