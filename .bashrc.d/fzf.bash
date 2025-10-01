@@ -1,8 +1,8 @@
 # Fuzzy-Find Command History
 #
 # Reference:
-# - https://github.com/junegunn/fzf
-# - https://formulae.brew.sh/formula/fzf
+# 	- https://github.com/junegunn/fzf
+# 	- https://formulae.brew.sh/formula/fzf
 #
 # Install:
 # `brew install fzf`

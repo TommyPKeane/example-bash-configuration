@@ -1,8 +1,8 @@
 # git Distributed Version Control System (DVCS)
 #
 # Reference:
-# - https://git-scm.com/
-# - https://formulae.brew.sh/formula/git
+# 	- https://git-scm.com/
+# 	- https://formulae.brew.sh/formula/git
 #
 # Install:
 # `brew install git`

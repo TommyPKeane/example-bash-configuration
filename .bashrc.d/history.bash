@@ -1,8 +1,8 @@
 # BASh History Configuration
 #
 # Reference:
-# - https://www.gnu.org/software/bash/manual/html_node/Using-History-Interactively.html
-# - https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_02.html
+# 	- https://www.gnu.org/software/bash/manual/html_node/Using-History-Interactively.html
+# 	- https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_02.html
 
 shopt -s histappend
 

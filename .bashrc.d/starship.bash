@@ -1,8 +1,8 @@
 # Cross-Platform Shell Prompt
 #
 # Reference:
-# - https://starship.rs/
-# - https://formulae.brew.sh/formula/starship
+# 	- https://starship.rs/
+# 	- https://formulae.brew.sh/formula/starship
 #
 # Install:
 # `brew install starship`

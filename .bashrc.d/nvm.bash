@@ -2,8 +2,8 @@
 # (Node Version Manager)
 #
 # Reference:
-# - https://github.com/nvm-sh/nvm
-# - https://formulae.brew.sh/formula/nvm
+# 	- https://github.com/nvm-sh/nvm
+# 	- https://formulae.brew.sh/formula/nvm
 #
 # Install:
 # `brew install nvm`
