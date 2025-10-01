@@ -131,12 +131,6 @@ brew install warrensbox/tap/tfswitch
 brew install dive
 
 
-# Bash Configs Overwrite
-echo "💾 Overwriting bash Configuration Files..."
-cp -Rv ./.bashrc.d/ ~/.bashrc.d
-cp -v ./.bashrc ~/
-cp -v ./.bash_profile ~/
-
-
-# Update current Shell without needing to close Terminal
-source ~/.bashrc
+# End of Script
+echo "💻 Run \`./overwrite_bash_configs.sh\` to update your bash Configuration..."
+echo "(Note that Linux or Cloud VM users may want to check their current configuration and make the changes manually instead of running the overwrite script)"
