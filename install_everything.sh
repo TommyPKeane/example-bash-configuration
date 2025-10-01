@@ -2,47 +2,55 @@
 # Installation Script for macOS (or Linux with `brew`) of all recommended tools
 #
 # References:
-#	- https://github.com/TommyPKeane/example-bash-configuration
-#	- https://stackoverflow.com/questions/394230/how-to-detect-the-os-from-a-bash-script
-#	- https://stackoverflow.com/questions/23424783/ostype-not-available-in-shell-script
-#	- https://www.redhat.com/en/blog/exit-codes-demystified
+#   - https://github.com/TommyPKeane/example-bash-configuration
+#   - https://stackoverflow.com/questions/394230/how-to-detect-the-os-from-a-bash-script
+#   - https://stackoverflow.com/questions/23424783/ostype-not-available-in-shell-script
+#   - https://www.redhat.com/en/blog/exit-codes-demystified
 
 set -eu
 
 # OS-specific Installations
 #
-#	- macOS: XCode Utilities need to be installed
-#	- Linux: N/A
-#	- Windows: N/A
+#   - macOS: XCode Utilities need to be installed
+#   - Linux: N/A
+#   - Windows: N/A
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	; # pass
+    : # pass
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-	xcode-select --install
+    if ! xcode-select --version >/dev/null 2>&1; then
+        xcode-select --install
+    else
+        echo "✅ xcode-select Tools Already Installed"
+    fi
 elif [[ "$OSTYPE" == "cygwin" ]]; then
-	; # pass
+    : # pass
 elif [[ "$OSTYPE" == "msys" ]]; then
-	; # pass
+    : # pass
 elif [[ "$OSTYPE" == "win32" ]]; then
-	; # pass
+    : # pass
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
-	; # pass
+    : # pass
 else
-	if [[ $(uname) == "Darwin" ]]; then
-		xcode-select --install
-	else
-		>&2 echo "⚠️ Could not determine Operating System | Exiting"
-		exit 1
-	fi
+    if [[ $(uname) == "Darwin" ]]; then
+        if ! xcode-select --version >/dev/null 2>&1; then
+            xcode-select --install
+        else
+            echo "✅ xcode-select Tools Already Installed"
+        fi
+    else
+        >&2 echo "⚠️ Could not determine Operating System | Exiting"
+        exit 1
+    fi
 fi
 
 
 # brew Install
 if ! command -v brew >/dev/null 2>&1; then
-	echo "⬇️ Installing brew ..."
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo "⬇️ Installing brew ..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
-	echo "✅ brew Already Installed"
+    echo "✅ brew Already Installed"
 fi
 brew update
 brew upgrade
