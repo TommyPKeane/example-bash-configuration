@@ -23,6 +23,7 @@ echo "💾 Overwriting bash Configuration Files..."
 cp -Rv ./.bashrc.d/ ~/.bashrc.d
 cp -v ./.bashrc ~/
 cp -v ./.bash_profile ~/
+cp -v ./.vimrc ~/
 
 
 # Scroll Ahead

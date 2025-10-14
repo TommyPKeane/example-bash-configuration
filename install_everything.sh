@@ -132,6 +132,11 @@ brew install warrensbox/tap/tfswitch
 brew install dive
 
 
+# vim Utilities
+brew install bat ripgrep the_silver_searcher perl universal-ctags  # Dependencies for fzf in vim
+brew install pylsp  # lsp (Language Server Protocol) for Python for vim
+
+
 # End of Script
 echo "💻 Run \`./overwrite_bash_configs.sh\` to update your bash Configuration..."
 echo "(Note that Linux or Cloud VM users may want to check their current configuration and make the changes manually instead of running the overwrite script)"
