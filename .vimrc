@@ -6,6 +6,10 @@
 "   - https://vimhelp.org/
 "   - https://www.freecodecamp.org/news/vimrc-configuration-guide-customize-your-vim-editor/
 
+" vim <leader> and <localleader>
+let mapleader = ","
+let maplocalleader = "\\"
+
 " vim-plug
 "   - https://github.com/junegunn/vim-plug
 
@@ -28,8 +32,7 @@ endif
 "   - Avoid using standard Vim directory names like 'plugin'
 call plug#begin()
 
-Plug 'prabirshrestha/vim-lsp'  " vim Language Server Protocol (https://github.com/prabirshrestha/vim-lsp)
-Plug 'mattn/vim-lsp-settings'
+Plug 'yegappan/lsp'  " vim Language Server Protocol (https://github.com/prabirshrestha/vim-lsp)
 
 call plug#end()
 
@@ -43,21 +46,60 @@ syntax on             " Enable syntax highlighting
 " References:
 "   - https://www.vimfromscratch.com/articles/vim-and-language-server-protocol
 "   - https://frostyx.cz/posts/lsp-for-vim-boomers
-let g:lsp_auto_enable = 1
-let g:lsp_diagnostics_enabled = 0
-let g:lsp_use_native_client = 0
-let g:lsp_preview_keep_focus = 0
-let g:lsp_preview_float = 1
-let g:lsp_preview_autoclose = 0
-let g:lsp_completion_documentation_enabled = 1
-
-function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    setlocal signcolumn=yes
-    nmap <buffer> gd <plug>(lsp-definition)
-    nmap <buffer> gr <plug>(lsp-references)
-    nmap <buffer> K <plug>(lsp-hover)
-endfunction
+let lspOpts = #{
+  \ aleSupport: v:false,
+  \ autoComplete: v:true,
+  \ autoHighlight: v:false,
+  \ autoHighlightDiags: v:true,
+  \ autoPopulateDiags: v:false,
+  \ completionMatcher: 'case',
+  \ completionMatcherValue: 1,
+  \ diagSignErrorText: 'E>',
+  \ diagSignHintText: 'H>',
+  \ diagSignInfoText: 'I>',
+  \ diagSignWarningText: 'W>',
+  \ echoSignature: v:false,
+  \ hideDisabledCodeActions: v:false,
+  \ highlightDiagInline: v:true,
+  \ hoverInPreview: v:true,
+  \ ignoreMissingServer: v:false,
+  \ keepFocusInDiags: v:true,
+  \ keepFocusInReferences: v:true,
+  \ completionTextEdit: v:true,
+  \ diagVirtualTextAlign: 'above',
+  \ diagVirtualTextWrap: 'default',
+  \ noNewlineInCompletion: v:false,
+  \ omniComplete: v:null,
+  \ omniCompleteAllowBare: v:false,
+  \ outlineOnRight: v:false,
+  \ outlineWinSize: 20,
+  \ popupBorder: v:true,
+  \ popupBorderHighlight: 'Title',
+  \ popupBorderHighlightPeek: 'Special',
+  \ popupBorderSignatureHelp: v:false,
+  \ popupHighlightSignatureHelp: 'Pmenu',
+  \ popupHighlight: 'Normal',
+  \ semanticHighlight: v:true,
+  \ showDiagInBalloon: v:true,
+  \ showDiagInPopup: v:true,
+  \ showDiagOnStatusLine: v:false,
+  \ showDiagWithSign: v:true,
+  \ showDiagWithVirtualText: v:false,
+  \ showInlayHints: v:false,
+  \ showSignature: v:true,
+  \ snippetSupport: v:false,
+  \ ultisnipsSupport: v:false,
+  \ useBufferCompletion: v:false,
+  \ usePopupInCodeAction: v:false,
+  \ useQuickfixForLocations: v:false,
+  \ vsnipSupport: v:false,
+  \ bufferCompletionTimeout: 100,
+  \ customCompletionKinds: v:false,
+  \ completionKinds: {},
+  \ filterCompletionDuplicates: v:false,
+  \ condensedCompletionMenu: v:false,
+\}
+autocmd User LspSetup call LspOptionsSet(lspOpts)
 
 
 " lsp: pylsp (Python)
@@ -65,11 +107,12 @@ endfunction
 " References:
 "   - ...
 if (executable('pylsp'))
-    au User lsp_setup call lsp#register_server({
-  \ 'name': 'pylsp',
-  \ 'cmd': {server_info->['pylsp']},
-  \ 'allowlist': ['python']
-  \ })
+  let lspServers = [#{
+    \   name: 'pylsp',
+    \   cmd: {server_info->['pylsp']},
+    \   allowlist: ['python']
+    \ }]
+  autocmd User LspSetup call LspAddServer(lspServers)
 endif
 
 
@@ -80,26 +123,45 @@ endif
 " References:
 "   - https://docs.astral.sh/ruff/editors/setup/#vim
 if executable('ruff')
-  au User lsp_setup call lsp#register_server({
-    \ 'name': 'ruff',
-    \ 'cmd': {server_info->['ruff', 'server']},
-    \ 'allowlist': ['python'],
-    \ 'workspace_config': {},
-    \ })
+  let lspServers = [#{
+    \   name: 'ruff',
+    \   cmd: {server_info->['ruff', 'server']},
+    \   allowlist: ['python'],
+    \   workspace_config: {},
+    \ }]
+  autocmd User LspSetup call LspAddServer(lspServers)
 endif
 
 
-" lsp Install Language Servers
-augroup lsp_install
-    au!
-    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
+" lsp: C / C++ (clang)
+"
+" C/C++ Linting and Formatting implemented in clang
+"
+" References:
+"   - ...
+if executable('clangd')
+  let lspServers = [#{
+    \   name: 'clang',
+    \   filetype: ['c', 'cpp'],
+    \   path: '/usr/local/bin/clangd',
+    \   args: ['--background-index']
+    \ }]
+  autocmd User LspSetup call LspAddServer(lspServers)
+endif
+
+
+" lsp Remappings
+set keywordprg=:LspHover
 
 
 " General Configuration Options
 "   - https://vimhelp.org/
 "   - https://github.com/amix/vimrc
+
+
+" number
+set number
+set numberwidth=6
 
 
 " ruler
