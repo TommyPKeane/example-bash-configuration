@@ -117,7 +117,11 @@ brew install rustup
 
 # Node.js Utilities
 brew install nvm
+brew install nodejs
 
+# Java (JVM)
+$ brew install java
+$ sudo ln -sfn $(brew --prefix java)/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 
 # Kubernetes Utilities
 brew install kubectl
