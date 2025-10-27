@@ -143,7 +143,7 @@ if executable('clangd')
   let lspServers = [#{
     \   name: 'clang',
     \   filetype: ['c', 'cpp'],
-    \   path: '/usr/local/bin/clangd',
+    \   path: '/usr/bin/clangd',
     \   args: ['--background-index']
     \ }]
   autocmd User LspSetup call LspAddServer(lspServers)
@@ -157,6 +157,11 @@ set keywordprg=:LspHover
 " General Configuration Options
 "   - https://vimhelp.org/
 "   - https://github.com/amix/vimrc
+
+
+" filetype
+:filetype plugin on
+:filetype indent on
 
 
 " number
