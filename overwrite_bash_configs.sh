@@ -32,3 +32,8 @@ clear
 
 # Update current Shell without needing to close Terminal
 source ~/.bashrc
+
+
+# Update vim Plugins
+vim +PlugUpdate
+vim +PlugInstall
