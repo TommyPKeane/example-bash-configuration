@@ -34,6 +34,13 @@ call plug#begin()
 
 Plug 'yegappan/lsp'  " vim Language Server Protocol (https://github.com/prabirshrestha/vim-lsp)
 
+Plug 'vim-airline/vim-airline'  " Status Bar (https://github.com/vim-airline/vim-airline)
+
+Plug 'ycm-core/YouCompleteMe'  " https://github.com/ycm-core/YouCompleteMe
+
+" Color Schemes
+Plug 'sainnhe/everforest'  " https://github.com/sainnhe/everforest
+
 call plug#end()
 
 " Adjust for Autoconfigured Options per plug#end()
@@ -194,3 +201,13 @@ else
 endif
 set wildmode=longest:full
 set wildoptions=pum
+
+
+" Color Scheme
+if has('termguicolors')
+  set termguicolors
+endif
+set background=dark  " dark or light
+let g:everforest_background = 'hard'  " 'hard', 'medium'(default), 'soft'
+let g:everforest_better_performance = 1
+silent! colorscheme everforest
